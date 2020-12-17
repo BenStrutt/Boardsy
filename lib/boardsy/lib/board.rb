@@ -13,6 +13,18 @@ class Board
     end
   end
   
+  def length
+    grid.first.size
+  end
+  
+  def width
+    grid.size
+  end
+  
+  def squares
+    each.to_a
+  end
+  
   #TODO: write exception tests
   def square(*coords)
     coords = format_coords(coords)
@@ -20,25 +32,6 @@ class Board
     raise ArgumentError, 'Coordinates passed are out of bounds.'
   end
   
-  def index(coords)
-    x,y = format_coords(coords)
-    [grid.size - y, x - 1]
-  end
-  
-  def rows
-    grid.size
-  end
-  
-  def cols
-    grid.transpose.size
-  end
-  
-  def squares
-    each.to_a
-  end
-  
-  alias :columns :cols
-
   def col(*coords)
     grid.transpose[format_coords(coords).first - 1].reverse
   end
@@ -121,9 +114,7 @@ class Board
   def flip(axis = :x)
     raise ArgumentError unless [:x, :y].include?(axis.to_sym)
     flip!(axis)
-    board = Board.new(grid.first.size, grid.size) do |x,y|
-      square(x,y).value
-    end
+    board = Board.new(grid.first.size, grid.size) { |x,y| square(x,y).value }
     flip!(axis)
     board
   end
@@ -156,6 +147,11 @@ class Board
   
   def [](idx)
     grid[idx]
+  end
+  
+  def index(coords)
+    x,y = format_coords(coords)
+    [grid.size - y, x - 1]
   end
   
   private
