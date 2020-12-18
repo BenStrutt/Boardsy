@@ -85,11 +85,11 @@ board = Board.new(2)
 board.squares.map { |sq| sq.coords } # [[1,1], [2,1], [1,2], [2,2]]
 ```
 
-### Methods for selection portions of the board.
+### Methods for selecting portions of the board.
 
 `Board#square` returns the `Square` object as specified by the coordinates passed as an argument.
 The 'x' and 'y' coordinates can be passed as individual arguments, an `[x,y]` array, or an `'xy'` string.
-The coordinates can additionally be passed an algebraic format, as done in chess: `d4`, `['d',5]`.
+The coordinates can additionally be passed an algebraic format, as done in chess: `'d4'`, `['d',5]`.
 This also applies to any following method that takes coordinates as an argument.
 
 ```ruby
@@ -99,7 +99,7 @@ board.square([7,2])
 board.square('a5')
 ```
 
-`Board#row` returns the row,from left to right as an array, in which the given square is located.
+`Board#row` returns the row, from left to right as an array, in which the given square is located.
 `Board#col` or `Board#column` returns the column, from bottom to top as an array, in which the given square is located.
 Both methods will accept a `Square` object as an argument as well as coordinates formatted in the same way as `Board#square`.
 
@@ -187,7 +187,7 @@ board_y # returns the following Board object:
 board.flip!('x')
 board.flip!(:y)
 
-board # now returns the folling Board object:
+board # now returns the following Board object:
 # |O|O|O|
 # |O|O|X|
 # |X|O|O|
